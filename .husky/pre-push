@@ -1,1 +1,1 @@
-yarn format && yarn lint && yarn type-check && yarn test:unit || pnpm format && pnpm lint && pnpm type-check && pnpm test:unit || npm format && npm lint && npm type-check && npm test:unit
+yarn format && yarn lint && yarn type-check && yarn test:unit || pnpm run format && pnpm run lint && pnpm run type-check && pnpm run test:unit || npm run format && npm run lint && npm run type-check && npm run test:unit
