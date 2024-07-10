@@ -1,0 +1,28 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+#app,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100dvh;
+  min-width: 100dvw;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}

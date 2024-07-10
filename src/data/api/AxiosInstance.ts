@@ -3,7 +3,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig
 } from 'axios'
-import type { ApiService } from './Api'
+import type { ApiService } from '@/domain/interfaces/ApiService'
 
 class ApiClientService {
   private readonly service: ApiService

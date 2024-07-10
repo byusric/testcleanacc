@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Title",
+    "key": "title"
+  },
+  {
+    "name": "Price",
+    "key": "price"
+  },
+  {
+    "name": "Description",
+    "key": "description"
+  },
+  {
+    "name": "Category",
+    "key": "category"
+  },
+  {
+    "name": "Image",
+    "key": "image"
+  },
+  {
+    "name": "Rating",
+    "key": "rating.rate"
+  }
+]
