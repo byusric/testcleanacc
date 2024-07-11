@@ -37,7 +37,6 @@ describe('Axios Instance', () => {
       await AxiosInstance.get('')
       await flushPromises()
     } catch (error) {
-      console.log(error)
       expect((error as AxiosError).status).toBe(401)
     }
   })
