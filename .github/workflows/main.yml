@@ -39,9 +39,6 @@ jobs:
           COVERAGE_FILE="./coverage/coverage-summary.json"  # Adjust path if your reports differ
           COVERAGE=$(cat $COVERAGE_FILE | jq '.total.lines.pct' | tr -d '\r')
           echo "Coverage percentage: $COVERAGE%"
-
-      - name: Check if coverage meets threshold
-        run: | # Bash script to compare coverage with threshold
           THRESHOLD=90
           if [[ $COVERAGE -lt $THRESHOLD ]]; then
             echo "❌ Coverage ($COVERAGE%) below threshold ($THRESHOLD%). Failing job."
