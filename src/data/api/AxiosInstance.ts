@@ -41,11 +41,11 @@ const addInterceptors = (service: AxiosInstance) => {
       return value
     },
     (error) => {
-      if (error.response.status === 401) {
+      if (error.response?.status === 401) {
         // TODO: Handle if is unauthorized
       }
       return Promise.reject({
-        status: error.response && error.response.status,
+        status: error.response && error.response?.status,
         response: error.response || error
       })
     }
