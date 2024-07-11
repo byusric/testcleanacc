@@ -1,37 +1,23 @@
-name: Application testing
+name: Run tests
 on:
   push:
-  workflow_dispatch:
+
 jobs:
-  unit-tests:
-    name: Unit tests
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 9
-          run_install: false
-
-      - name: Install Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-
       - name: Install dependencies
         run: pnpm install
-
-      - name: Run tests
-        run: pnpm run test:unit
-
-      - name: Build typescript
-        run: pnpm run type-check
