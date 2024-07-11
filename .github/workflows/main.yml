@@ -8,6 +8,8 @@ jobs:
     strategy:
       matrix:
         node-version: [20]
+    env: # Or as an environment variable
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
