@@ -1,4 +1,4 @@
-name: pnpm Example Workflow
+name: App test
 on:
   push:
 
@@ -15,12 +15,13 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 9 # Specify desired pnpm version
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          cache: 'pnpm' # Cache pnpm dependencies
 
       - name: Install dependencies
         run: pnpm install
@@ -31,5 +32,5 @@ jobs:
       - name: Run type-check
         run: pnpm type-check
 
-      - name: Run tests
-        run: pnpm test:unit
+      - name: Run tests with coverage
+        run: pnpm coverage # Assuming your testing framework integrates with pnpm coverage
