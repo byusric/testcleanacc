@@ -90,3 +90,25 @@ describe('Axios Instance', () => {
     expect(resp).toBe('')
   })
 })
+
+import { vi, beforeEach } from 'vitest' // For mocking
+
+describe('ApiClientService', () => {
+  beforeEach(() => {
+    vi.mock('@services/ApiService') // Mock the ApiService dependency
+  })
+
+  afterEach(() => {
+    vi.restoreAllMocks() // Reset all mocks after each test
+  })
+
+  it('should create a new ApiClientService instance on first call', () => {
+    const mockCreateApiServiceAxios = vi.fn().mockReturnValue('mockedInstance') // Mock createApiServiceAxios
+    vi.spyOn(ApiClientService, 'getInstance').mockImplementation(mockCreateApiServiceAxios) // Replace createApiServiceAxios
+
+    const instance1 = ApiClientService.getInstance()
+
+    expect(instance1).toBe('mockedInstance') // Assert the returned instance
+    expect(mockCreateApiServiceAxios).toHaveBeenCalledTimes(1) // Assert createApiServiceAxios call count
+  })
+})

@@ -14,7 +14,7 @@ export default mergeConfig(
         exclude: [
           'src/App.vue',
           'src/main.ts',
-          'src/router/*',
+          'src/presentation/router/*',
           '.eslintrc.cjs',
           '*.config.ts',
           '**/*.spec.*',

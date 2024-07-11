@@ -49,14 +49,6 @@ export class MockWebServer {
     this.server.use(...mwsHandlers)
   }
 
-  addVerificationListener(assertion: (req: globalThis.Request) => void) {
-    this.server.events.on('request:start', (req) => {
-      const request = req.request
-
-      assertion(request)
-    })
-  }
-
   createMwsHandler<T extends DefaultBodyType>(handler: MockHandler<T>) {
     switch (handler.method) {
       case 'get':

@@ -1,12 +1,10 @@
 <template>
-  <tr>
+  <tr v-memo="[tableConfig, item]">
     <td v-for="config in tableConfig" :key="config.name + config.key">
-      <component
-        :is="config.component"
-        v-if="config.component"
-        :value="getObjectValue(config.key ?? '', item)"
-      />
-      <span v-else class="table-item">{{ getObjectValue(config.key ?? '', item) }}</span>
+      <span v-if="!config.component" class="table-item">{{
+        getObjectValue(config.key ?? '', item)
+      }}</span>
+      <component v-else :is="config.component" :value="getObjectValue(config.key ?? '', item)" />
     </td>
   </tr>
 </template>
