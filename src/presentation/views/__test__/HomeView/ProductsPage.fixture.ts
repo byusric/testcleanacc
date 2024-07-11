@@ -6,7 +6,7 @@ export function givenAProducts(mockWebServer: MockWebServer): ProductResponse[] 
   mockWebServer.addRequestHandlers([
     {
       method: 'get',
-      endpoint: 'https://fakestoreapi.com/products',
+      endpoint: new URL('products', import.meta.env.VITE_API_URL).href,
       httpStatusCode: 200,
       response: productsResponse
     }
