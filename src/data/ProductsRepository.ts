@@ -8,8 +8,4 @@ export class ProductsRepository {
   async getAll(): Promise<ProductResponse[]> {
     return this.api.get<ProductResponse[]>(this.uri)
   }
-
-  async get(id: string): Promise<ProductResponse> {
-    return this.api.get<ProductResponse>(`${this.uri}/${id}`)
-  }
 }

@@ -5,13 +5,9 @@ import axios, {
 } from 'axios'
 import type { ApiService } from '@/domain/interfaces/ApiService'
 
-class ApiClientService {
+export class ApiClientService {
   private readonly service: ApiService
   private static instance: ApiClientService
-
-  private static handleSuccess(response: any) {
-    return response
-  }
 
   public constructor() {
     const instance = axios.create({
@@ -55,18 +51,10 @@ const addInterceptors = (service: AxiosInstance) => {
     }
   )
 
-  service.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-      // TODO: handle if have token
-      return config
-    },
-    (error) => {
-      return Promise.reject({
-        status: error.response && error.response.status,
-        response: error.response || error
-      })
-    }
-  )
+  service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+    // TODO: handle if have token
+    return config
+  })
 }
 
 const createApiServiceAxios = (axios: AxiosInstance): ApiService => ({
@@ -80,14 +68,14 @@ const createApiServiceAxios = (axios: AxiosInstance): ApiService => ({
   post: async function <T = any, P = any>(
     url: string,
     data: P,
-    params: Record<string, any>
+    params?: Record<string, any>
   ): Promise<T> {
     return (await axios.post<T, any, P>(url, data, { params })).data
   },
   postMultipart: async function <T = any>(
     url: string,
     data: FormData,
-    params: Record<string, any>
+    params?: Record<string, any>
   ): Promise<T> {
     return (
       await axios.post<T, any, FormData>(url, data, {
@@ -99,7 +87,7 @@ const createApiServiceAxios = (axios: AxiosInstance): ApiService => ({
   patch: async function <T = any, P = any>(
     url: string,
     data: P,
-    params: Record<string, any>
+    params?: Record<string, any>
   ): Promise<T> {
     return (
       await axios.patch<T, any, P>(url, data, {
@@ -110,7 +98,7 @@ const createApiServiceAxios = (axios: AxiosInstance): ApiService => ({
   patchMultipart: async function <T = any>(
     url: string,
     data: FormData,
-    params: Record<string, any>
+    params?: Record<string, any>
   ): Promise<T> {
     return (
       await axios.patch<T, any, FormData>(url, data, {
@@ -120,7 +108,30 @@ const createApiServiceAxios = (axios: AxiosInstance): ApiService => ({
     ).data
   },
   delete: async function (url: string): Promise<void> {
-    return await axios.delete(url)
+    return (await axios.delete(url)).data
+  },
+  put: async function <T = any, P = any>(
+    url: string,
+    data: P,
+    params?: Record<string, any>
+  ): Promise<T> {
+    return (
+      await axios.put<T, any, P>(url, data, {
+        params
+      })
+    ).data
+  },
+  putMultipart: async function <T = any>(
+    url: string,
+    data: FormData,
+    params?: Record<string, any>
+  ): Promise<T> {
+    return (
+      await axios.put<T, any, FormData>(url, data, {
+        params,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
+    ).data
   }
 })
 
