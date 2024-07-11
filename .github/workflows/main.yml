@@ -36,8 +36,8 @@ jobs:
 
       - name: Calculate coverage percentage
         run: | # Bash script to calculate coverage percentage
-          COVERAGE_FILE="./coverage/*.json"  # Adjust path if your reports differ
-          COVERAGE=$(cat $COVERAGE_FILE | jq '.total.lines.covered / .total.lines * 100' | tr -d '\r')
+          COVERAGE_FILE="./coverage/coverage-summary.json"  # Adjust path if your reports differ
+          COVERAGE=$(cat $COVERAGE_FILE | jq '.total.lines.pct' | tr -d '\r')
           echo "Coverage percentage: $COVERAGE%"
 
       - name: Check if coverage meets threshold
