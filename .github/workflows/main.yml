@@ -7,7 +7,7 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -16,7 +16,10 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run tests
-        run: npm run test:unit
+        run: pnpm run test:unit
+
+      - name: Build typescript
+        run: pnpm run type-check
